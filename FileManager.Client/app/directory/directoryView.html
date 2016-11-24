@@ -1,0 +1,23 @@
+﻿<div class="panel panel-primary"
+     ng-controller="DirectoryCtrl as vm">
+    <div class="panel-heading"
+         style="font-size:large">
+        Directory
+    </div>
+
+    <div class="panel-body">
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <td>Subdirectories list</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="subdir in vm.directory.subdirectories">
+                    <td>{{ subdir.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
