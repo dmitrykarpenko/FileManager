@@ -1,13 +1,18 @@
 ﻿<div class="panel panel-primary"
      ng-controller="DirectoryCtrl as vm">
-    <div class="panel-heading"
-         style="font-size:large">
-        Directory
+
+    <div class="panel panel-info">
+        Less 10Mb: {{ vm.directory.countOf.lessTenMb }},
+        10Mb to 50Mb: {{ vm.directory.countOf.tenToFiftyMb }},
+        Greater 100Mb: {{ vm.directory.countOf.greaterHundredMb }}
     </div>
 
+    <div class="panel-heading"
+         style="font-size:large">
+        Current directory: {{ vm.directory.name }} (path: {{ vm.directory.path }})
+    </div>
     <div class="panel-body">
         <table class="table">
-
             <thead>
                 <tr>
                     <td>Subdirectories list</td>
@@ -16,6 +21,9 @@
             <tbody>
                 <tr ng-repeat="subdir in vm.directory.subdirectories">
                     <td>{{ subdir.name }}</td>
+                </tr>
+                <tr ng-repeat="file in vm.directory.files">
+                    <td>{{ file.name }}</td>
                 </tr>
             </tbody>
         </table>

@@ -13,23 +13,17 @@ using System.Web.Http.Cors;
 
 namespace FileManager.WebAPI.Controllers
 {
-    //[EnableCorsAttribute("http://localhost:50202", "*", "*")]
+    [EnableCorsAttribute("http://localhost:50202", "*", "*")]
     public class DirectoryController : ApiController
     {
         public DirectoryM Get()
         {
-            return Get("F:\\Video");
+            return Get("D:\\");
         }
 
         public DirectoryM Get(string id)
         {
             var dirM = DirectoryHelper.GetDirectoryModelByPath(id);
-
-            //var encodedPath = Uri.EscapeUriString("C:\\ololo as;ojf;sdfj\\oasjdfsj");
-
-            var dummyDir = new DirectoryM() { Name = "Dummy", Subdirectories =
-                new List<DirectoryM>() { new DirectoryM() { Name = "Dummy subdir" },
-                                         new DirectoryM() { Name = "Dummy subdir 2" } } };
 
             return dirM;
         }

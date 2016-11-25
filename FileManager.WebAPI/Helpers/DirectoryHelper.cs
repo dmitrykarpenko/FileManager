@@ -20,19 +20,22 @@ namespace FileManager.WebAPI.Helpers
 
         private static DirectoryM Convert(DirectoryInfo dirInfo)
         {
+            //could take top file from all files with LINQ, but it's relatively quick as is
+            IEnumerable<FileInfo> topFilesList = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly);
             IEnumerable<FileInfo> allFilesList = dirInfo.GetFiles("*.*", SearchOption.AllDirectories);
             IEnumerable<DirectoryInfo> subdirectoriesList = dirInfo.GetDirectories();
 
-            IEnumerable<FileM> files = allFilesList.Select(f => Convert(f));
+            IEnumerable<FileM> topFiles = topFilesList.Select(f => Convert(f));
+            IEnumerable<FileM> allFiles = allFilesList.Select(f => Convert(f));
             IEnumerable<DirectoryM> subdirectories = subdirectoriesList.Select(sd => Convert(sd));
 
             var dirM = new DirectoryM()
             {
                 Name = dirInfo.Name,
                 Path = dirInfo.FullName,
-                Files = files,
+                Files = topFiles,
                 Subdirectories = subdirectories,
-                CountOf = GetCountOf(files)
+                CountOf = GetCountOf(allFiles)
             };
             return dirM;
         }
